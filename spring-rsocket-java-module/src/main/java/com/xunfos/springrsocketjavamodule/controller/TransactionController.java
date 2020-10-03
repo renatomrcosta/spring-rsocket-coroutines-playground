@@ -16,15 +16,17 @@ import java.util.List;
 public class TransactionController {
     private TransactionService transactionService;
 
+    // Request Response
     @MessageMapping("last")
     public Mono<Transaction> lastTransaction() {
         return Mono.just(transactionService.lastTransaction());
     }
 
-    @MessageMapping("current")
-    public Flux<Transaction> current() {
-        final List<Transaction> transactionList = transactionService.getCurrentTransactions();
+    @MessageMapping("tail")
+    public Flux<Transaction> tail() {
+        return Flux
+                .<Transaction>generate(sink -> sink.next(transactionService.randomTransaction()))
+                .delayElements(Duration.ofMillis(100)); // Debug convention
 
-        return Flux.fromStream(transactionList.stream());
     }
 }
