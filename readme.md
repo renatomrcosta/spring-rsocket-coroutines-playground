@@ -22,7 +22,14 @@ Two simple message endpoints for now:
 
 - `current` tails a collection of "transactions"
 
+One can build a client manually, or use a command line tool such as [`rsc`](https://github.com/making/rsc) to invoke them.
+
 # TODO 
 - Implement a datasource to stream data instead of a hardcoded list of items
+    -> So grows the scope. Do I wanna check out R2DBC?
+
 - Implement the two-way subscription.
+    -> Maybe. This would be dope for the joustus thingie
+    
 - Write integration tests
+    -> Basic client implementation in the tests to call the stuff created
